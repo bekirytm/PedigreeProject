@@ -1,3 +1,7 @@
+/node_modules
+/.idea
+
+
 # OSX
 #
 .DS_Store
