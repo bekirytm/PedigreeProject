@@ -6,7 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Screens
-import LoginPage from './screens/LoginPage';
+import LoginPage from './screens/Login/LoginPage';
 
 
 
