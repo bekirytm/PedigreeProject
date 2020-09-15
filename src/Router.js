@@ -19,13 +19,7 @@ const LoginStack = () => {
     return(
         <Stack.Navigator
             screenOptions={{
-                headerStyle: {
-                    backgroundColor: 'red'
-                },
-                headerTintColor: '#fff',
-                headerTitleStyle: {
-                    fontWeight: 'bold'
-                }
+                headerShown: false
             }}
         >
             <Stack.Screen name="Contact" component={LoginPage} options={{ title: 'Login'}} />

@@ -14,23 +14,30 @@ const LoginPage = () => {
   return(
     <View style={styles.container}>
         <View style={styles.headerBackground}/>
-        <View>
-            <LoginLogo></LoginLogo>
-        </View>
-        <ScrollView>
-            <KeyboardAvoidingView behavior={'position'}>
-                <View style={styles.formContainer}>
+        
+            <View style={styles.logoContainer}>
+                <LoginLogo/>
+            </View>
+
+            <View style={styles.formContainer}>
+                <View style={{marginTop: 10 , alignItems: 'center'}}>
+                    <Text style={styles.loginText}>Log In</Text>
+                </View>
+                <View style={styles.formContent}>
                     <LoginForm/>
                 </View>
-            </KeyboardAvoidingView>
-        </ScrollView>
+            </View>
+
+        {/*<KeyboardAvoidingView behavior={'position'}>*/}
+        {/*</KeyboardAvoidingView>*/}
     </View>
   )
 };
 
 const styles = StyleSheet.create({
-    formContainer: {
-        justifyContent: 'center'
+    container: {
+        flex: 1,
+        justifyContent: 'center',
     },
     headerBackground: {
         position: 'absolute',
@@ -40,6 +47,19 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#C78180',
 
+    },
+    loginText: {
+        color: '#ffffff'
+    },
+    logoContainer: {
+        flex: 0.45,
+        justifyContent: 'flex-end',
+        paddingTop: 10
+
+
+    },
+    formContainer: {
+        flex: 0.55
     },
 });
 
