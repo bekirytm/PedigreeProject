@@ -27,12 +27,25 @@ const LoginPage = ({navigation}) => {
                 <View style={styles.formContent}>
                     <LoginForm navigation={navigation}/>
                 </View>
+                <View
+                    style={{
+                        borderColor: '#813232',
+                        borderBottomWidth: 2,
+                        marginTop: 20
+                    }}
+                />
+                <View style={{ marginTop: 15, flex: 1,flexDirection:'row', alignItems:'flex-start'}}>
+                    <View style={{flex: 0.44, alignItems: 'flex-end', marginTop: 2, paddingRight: 10 }}>
+                        <Text style={{fontSize: 12}}>Don't have an account? </Text>
+                    </View>
+                    <View style={{flex: 0.56, alignItems: 'flex-start' }}>
+                        <TouchableOpacity style={{ alignItems:'center'}} onPress={() => navigation.navigate('SignUp')}>
+                            <Text style={{fontSize: 14,color: '#255BA1'}}>Sign Up</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
             </View>
-            <View>
-                <TouchableOpacity style={{width: 100, height: 30, backgroundColor: 'red'}} onPress={() => navigation.navigate('SignUp')}>
-                    <Text>Sign Up</Text>
-                </TouchableOpacity>
-            </View>
+
     </View>
   )
 };

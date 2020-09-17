@@ -39,7 +39,7 @@ const TabBarNavigation = () => {
     return(
         <TabBar.Navigator initialRouteName='Profile' tabBarOptions={{
             activeTintColor: '#E84A4D',
-            inactiveTintColor: '#D3D3D3',
+            inactiveTintColor: '#D4ADAC',
             style: {
                 backgroundColor: '#370617'
             }
