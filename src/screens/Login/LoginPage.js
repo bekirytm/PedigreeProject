@@ -1,5 +1,5 @@
 import React from 'react';
-import { View,KeyboardAvoidingView, Text,TextInput, StyleSheet, TouchableOpacity, Button, ScrollView, SafeAreaView} from 'react-native';
+import { View,KeyboardAvoidingView,Platform, Text,TextInput, StyleSheet, TouchableOpacity, Button, ScrollView, SafeAreaView} from 'react-native';
 
 // Components
 import LoginForm from './LoginForm';
@@ -10,26 +10,29 @@ import LoginLogo from './LoginLogo';
 
 
 
-const LoginPage = () => {
+const LoginPage = ({navigation}) => {
   return(
+
     <View style={styles.container}>
+
         <View style={styles.headerBackground}/>
-        
             <View style={styles.logoContainer}>
                 <LoginLogo/>
             </View>
 
             <View style={styles.formContainer}>
-                <View style={{marginTop: 10 , alignItems: 'center'}}>
+                <View style={{marginTop: 10, marginHorizontal: 50 }}>
                     <Text style={styles.loginText}>Log In</Text>
                 </View>
                 <View style={styles.formContent}>
-                    <LoginForm/>
+                    <LoginForm navigation={navigation}/>
                 </View>
             </View>
-
-        {/*<KeyboardAvoidingView behavior={'position'}>*/}
-        {/*</KeyboardAvoidingView>*/}
+            <View>
+                <TouchableOpacity style={{width: 100, height: 30, backgroundColor: 'red'}} onPress={() => navigation.navigate('SignUp')}>
+                    <Text>Sign Up</Text>
+                </TouchableOpacity>
+            </View>
     </View>
   )
 };

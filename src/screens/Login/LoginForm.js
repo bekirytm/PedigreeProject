@@ -4,7 +4,7 @@ import InputComp from "../../components/InputComp";
 import ButtonComp from '../../components/ButtonComp';
 
 
-const LoginForm = () => {
+const LoginForm = ({navigation}) => {
   const passwordInput = useRef();
 
   return(
@@ -24,8 +24,11 @@ const LoginForm = () => {
         <ButtonComp
             backgroundColor={'#AD5E5D'}
             color={'#ffffff'}
-            text={'Test Button'}
+            text={'Buton'}
+            navigation={navigation}
+            navigateTo={'TabBar'}
         />
+
     </View>
   )
 };

@@ -3,10 +3,15 @@ import { View, Text,TextInput, StyleSheet, TouchableOpacity, Button, ScrollView,
 
 
 
-const HomePage = () => {
+const HomePage = ({navigation}) => {
     return(
         <View>
             <Text>Home Page</Text>
+            <Button
+                title={"Exit"}
+                onPress={() => navigation.push('Login')}
+            >
+            </Button>
         </View>
     )
 };
