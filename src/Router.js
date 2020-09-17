@@ -7,6 +7,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import 'react-native-gesture-handler';
 
+// SVGR
+import {User, List, Plus} from './components/icons/index';
+
 // Screens
 import LoginPage from './screens/Login/LoginPage';
 import SignUp from './screens/SignUp/SignUp';
@@ -34,10 +37,23 @@ const AnimalsStact = () => {
 
 const TabBarNavigation = () => {
     return(
-        <TabBar.Navigator>
-            <TabBar.Screen name={"Profile"} component={Home}/>
-            <TabBar.Screen name={"Animals"} component={Animal}/>
-            <TabBar.Screen name={"AddAnimal"} component={Addanimal}/>
+        <TabBar.Navigator initialRouteName='Profile' tabBarOptions={{
+            activeTintColor: '#E84A4D',
+            inactiveTintColor: '#D3D3D3',
+            style: {
+                backgroundColor: '#370617'
+            }
+
+        }}>
+            <TabBar.Screen name={"Profile"} component={Home} options={{
+                tabBarIcon: User
+            }}/>
+            <TabBar.Screen name={"Animals"} component={Animal} options={{
+                tabBarIcon: List
+            }}/>
+            <TabBar.Screen name={"AddAnimal"} component={Addanimal} options={{
+                tabBarIcon: Plus
+            }}/>
         </TabBar.Navigator>
     )
 }
