@@ -24,7 +24,7 @@ const LoginForm = ({navigation}) => {
         <ButtonComp
             backgroundColor={'#AD5E5D'}
             color={'#ffffff'}
-            text={'Buton'}
+            text={'Login'}
             navigation={navigation}
             navigateTo={'TabBar'}
         />

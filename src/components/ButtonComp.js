@@ -23,11 +23,11 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         paddingVertical: 10,
-        paddingHorizontal: 10,
+        paddingHorizontal: 70,
         borderRadius: 3,
         alignItems: 'center',
         justifyContent: 'center',
-        width: 250
+
 
     },
     buttonText: {

@@ -16,21 +16,26 @@ import SignUp from './screens/SignUp/SignUp';
 
 import Home from './screens/Home/Home';
 import Animal from './screens/Animals/Animals';
+import DetailAnimal from './screens/Detail/DetailAnimal';
+
 import Addanimal from './screens/AddAnimal/AddAnimal';
 
 
-
-
+// Navigators
 const Stack = createStackNavigator();
 const StackAnimals = createStackNavigator();
 const TabBar = createBottomTabNavigator();
 
-//
-const AnimalsStact = () => {
+
+//  Animal Detail Stack
+const AnimalStact = () => {
     return(
-        <StackAnimals>
-            {/*<StackAnimals.Screen name={}*/}
-        </StackAnimals>
+        <StackAnimals.Navigator >
+            <StackAnimals.Screen name={'Animals'} component={Animal} options={{
+                headerShown: false
+            }}/>
+            <StackAnimals.Screen name={'Detail'} component={DetailAnimal}/>
+        </StackAnimals.Navigator>
     )
 }
 
@@ -48,7 +53,7 @@ const TabBarNavigation = () => {
             <TabBar.Screen name={"Profile"} component={Home} options={{
                 tabBarIcon: User
             }}/>
-            <TabBar.Screen name={"Animals"} component={Animal} options={{
+            <TabBar.Screen name={"Animals"} component={AnimalStact} options={{
                 tabBarIcon: List
             }}/>
             <TabBar.Screen name={"AddAnimal"} component={Addanimal} options={{

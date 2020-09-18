@@ -1,6 +1,24 @@
 import React from 'react';
-import { View, Text,TextInput, StyleSheet, TouchableOpacity, Button, ScrollView, SafeAreaView} from 'react-native';
+import { View, Text,TextInput,Alert, StyleSheet, TouchableOpacity, Button, ScrollView, SafeAreaView} from 'react-native';
 
+
+const logoutAlert = (navigation) => {
+    Alert.alert(
+        "Çıkış Yapılsın Mı ?",
+        "",
+        [
+            {
+                text: "Cancel",
+                onPress: () => console.log("Çıkış Iptal"),
+                style: "cancel"
+            },
+            { text: "OK", onPress: () => {
+                console.log('Çıkış Yapıldı')
+                navigation.push('Login')}}
+        ],
+        { cancelable: false }
+    );
+}
 
 
 const HomePage = ({navigation}) => {
@@ -8,8 +26,8 @@ const HomePage = ({navigation}) => {
         <View>
             <Text>Home Page</Text>
             <Button
-                title={"Exit"}
-                onPress={() => navigation.push('Login')}
+                title={"Logout"}
+                onPress={() => logoutAlert(navigation)}
             >
             </Button>
         </View>
