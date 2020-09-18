@@ -5,6 +5,8 @@ import { View,KeyboardAvoidingView,Platform, Text,TextInput, StyleSheet, Touchab
 import LoginForm from './LoginForm';
 import LoginLogo from './LoginLogo';
 
+import colors from '../../consts/colors';
+
 
 
 
@@ -40,7 +42,7 @@ const LoginPage = ({navigation}) => {
                     </View>
                     <View style={{flex: 0.56, alignItems: 'flex-start' }}>
                         <TouchableOpacity style={{ alignItems:'center'}} onPress={() => navigation.navigate('SignUp')}>
-                            <Text style={{fontSize: 14,color: '#255BA1'}}>Sign Up</Text>
+                            <Text style={{fontSize: 14,color: '#255ba1'}}>Sign Up</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -61,7 +63,7 @@ const styles = StyleSheet.create({
         left: 0,
         height: 800,
         width: '100%',
-        backgroundColor: '#C78180',
+        backgroundColor: colors.BackgroundsColor,
 
     },
     loginText: {

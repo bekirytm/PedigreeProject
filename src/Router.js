@@ -1,6 +1,6 @@
 import React,{ useState } from 'react';
 import { View, Text,TextInput, StyleSheet, TouchableOpacity, Button, ScrollView, SafeAreaView} from 'react-native';
-
+import colors from './consts/colors';
 // Navigators
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -34,7 +34,15 @@ const AnimalStact = () => {
             <StackAnimals.Screen name={'Animals'} component={Animal} options={{
                 headerShown: false
             }}/>
-            <StackAnimals.Screen name={'Detail'} component={DetailAnimal}/>
+            <StackAnimals.Screen name={'Detail'} component={DetailAnimal} options={{
+                headerStyle: {
+                    backgroundColor: colors.HeaderBackgroundColor,
+                },
+                headerTintColor: colors.HeaderTextColor,
+                headerTitleStyle: {
+                    fontWeight: '200'
+                }
+            }}/>
         </StackAnimals.Navigator>
     )
 }
@@ -43,7 +51,7 @@ const AnimalStact = () => {
 const TabBarNavigation = () => {
     return(
         <TabBar.Navigator initialRouteName='Profile' tabBarOptions={{
-            activeTintColor: '#E84A4D',
+            activeTintColor: '#F3494C',
             inactiveTintColor: '#D4ADAC',
             style: {
                 backgroundColor: '#370617'

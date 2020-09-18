@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text,TextInput, StyleSheet, TouchableOpacity, Button, ScrollView, SafeAreaView} from 'react-native';
 
+
+
 const ButtonComp = (props) => {
   const {color, backgroundColor, navigateTo} = props;
 
@@ -22,7 +24,7 @@ const styles = StyleSheet.create({
 
     },
     buttonContainer: {
-        paddingVertical: 10,
+        paddingVertical: 9,
         paddingHorizontal: 70,
         borderRadius: 3,
         alignItems: 'center',
