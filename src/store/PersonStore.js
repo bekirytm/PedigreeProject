@@ -1,12 +1,11 @@
 import {observable,action, configure} from 'mobx';
 import { createContext } from 'react';
 
-// configure({
-//     enforceActions: 'observed'
-// })
+configure({
+    enforceActions: 'observed'
+})
 
 class PersonStore{
-    @observable name = 'Bekir';
 
     @observable persons = [
         {
@@ -17,13 +16,6 @@ class PersonStore{
         }
     ]
 
-    @action changeName(){
-        if(this.name === 'Bekir'){
-            this.name = "AHMET"
-        }else{
-            this.name = 'Bekir'
-        }
-    }
 
     @action addAnimal(person){
         this.persons = [...this.persons, person];

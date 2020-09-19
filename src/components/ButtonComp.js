@@ -29,8 +29,6 @@ const styles = StyleSheet.create({
         borderRadius: 3,
         alignItems: 'center',
         justifyContent: 'center',
-
-
     },
     buttonText: {
         fontSize: 14
