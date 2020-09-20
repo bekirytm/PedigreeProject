@@ -1,11 +1,34 @@
 import React,{useState, useContext, useRef} from 'react';
-import { View, Text,TextInput, StyleSheet, TouchableOpacity, Button, ScrollView, SafeAreaView} from 'react-native';
+import {
+    View,
+    Text,
+    TextInput,
+    StyleSheet,
+    TouchableOpacity,
+    Button,
+    ScrollView,
+    SafeAreaView,
+    Alert,
+    KeyboardAvoidingView
+} from 'react-native';
 import ButtonComp from '../../components/ButtonComp';
 import {observer} from 'mobx-react';
 import PersonStore from '../../store/PersonStore';
 import colors from '../../consts/colors';
 
+// Input Alert
+const inputAlert = (text) => {
+    Alert.alert(
+        "Hata",
+        text,
+        [
+            { text: "OK", onPress: () => {
 
+            }}
+        ],
+        { cancelable: false }
+    );
+}
 
 export const SignUp = observer(({navigation}) => {
     const [username, setUsername] = useState('');
@@ -18,18 +41,29 @@ export const SignUp = observer(({navigation}) => {
     const inputRef = useRef();
 
     return(
+
         <View style={styles.container}>
             <View style={styles.titleContainer}>
                 <Text style={styles.titleContent}>Sign Up</Text>
+                <View
+                style={{
+                    borderBottomColor: '#813232',
+                    borderBottomWidth: 3,
+                    borderRadius: 3,
+                    borderColor: '#813232',
+                    marginTop: 2
+                }}
+            />
+
             </View>
 
             <View style={styles.formContainer}>
                 <ScrollView style={{width: '100%', height: '100%'}}>
-                <View style={{flex: 1}}>
+                <View>
                     <Text style={styles.textStyle}>Username</Text>
                     <TextInput
-                        returnKeyType = { "next" }
-                        onSubmitEditing={() => { this.secondTextInput.focus(); }}
+                        // returnKeyType = { "next" }
+                        // onSubmitEditing={() => { this.secondTextInput.focus(); }}
 
 
                         style={styles.inputStyle}
@@ -41,9 +75,9 @@ export const SignUp = observer(({navigation}) => {
                     />
                     <Text style={styles.textStyle}>Email</Text>
                     <TextInput
-                        returnKeyType = { "next" }
-                        ref={(input) => { this.secondTextInput = input; }}
-                        onSubmitEditing={() => { this.thirdTextInput.focus(); }}
+                        // returnKeyType = { "next" }
+                        // ref={(input) => { this.secondTextInput = input; }}
+                        // onSubmitEditing={() => { this.thirdTextInput.focus(); }}
 
                         style={styles.inputStyle}
                         value={email}
@@ -54,10 +88,11 @@ export const SignUp = observer(({navigation}) => {
                     />
                     <Text style={styles.textStyle}>Password</Text>
                     <TextInput
-                        returnKeyType = { "next" }
-                        ref={(input) => { this.thirdTextInput = input; }}
-                        onSubmitEditing={() => { this.fourthTextInput.focus(); }}
+                        // returnKeyType = { "next" }
+                        // ref={(input) => { this.thirdTextInput = input; }}
+                        // onSubmitEditing={() => { this.fourthTextInput.focus(); }}
 
+                        secureTextEntry={true}
                         style={styles.inputStyle}
                         value={password}
                         onChangeText={(password) => {
@@ -68,9 +103,10 @@ export const SignUp = observer(({navigation}) => {
 
                     <Text style={styles.textStyle}>Password(Retry)</Text>
                     <TextInput
-                        returnKeyType = { "next" }
-                        ref={(input) => { this.fourthTextInput = input; }}
+                        // returnKeyType = { "done" }
+                        // ref={(input) => { this.fourthTextInput = input; }}
 
+                        secureTextEntry={true}
                         style={styles.inputStyle}
                         value={retry}
                         onChangeText={(retry) => {
@@ -82,16 +118,25 @@ export const SignUp = observer(({navigation}) => {
                     {/*// Sign Up Button*/}
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.signUpButton} onPress={() => {
-                            let person = {};
-                            person[username] = {
-                                username,
-                                email,
-                                password,
-                                retry
-                            }
-                            personStore.addAnimal(person);
 
-                            console.log(person);
+                            if(username === "" || email === "" || password === "" || retry === ""){
+                                inputAlert('Tüm alanları doldurmalısınız.');
+                            }
+                            else if(password !== retry){
+                                inputAlert('Password aynı değil');
+                            }
+                            else{
+                                let person = {};
+                                person[username] = {
+                                    username,
+                                    email,
+                                    password,
+                                    retry
+                                }
+                                personStore.addAnimal(person);
+
+                                console.log(person);
+                            }
                         }}>
                             <Text style={styles.textButton}>Sign Up</Text>
                         </TouchableOpacity>
@@ -99,22 +144,20 @@ export const SignUp = observer(({navigation}) => {
 
 
                 </View>
+
+                <View style={styles.backArea}>
+                    <View>
+                        <ButtonComp
+                            backgroundColor={'#AD5E5D'}
+                            color={'#ffffff'}
+                            text={'Geri'}
+                            navigation={navigation}
+                            navigateTo={'Login'}
+                        >
+                        </ButtonComp>
+                    </View>
+                </View>
                 </ScrollView>
-            </View>
-            <View style={styles.backArea}>
-
-                <ButtonComp
-                    backgroundColor={'#AD5E5D'}
-                    color={'#ffffff'}
-                    text={'Geri'}
-                    navigation={navigation}
-                    navigateTo={'Login'}
-                >
-
-                </ButtonComp>
-
-
-
             </View>
 
         </View>
@@ -128,13 +171,17 @@ const styles = StyleSheet.create({
     },
     titleContainer: {
         flex: 0.15,
-        justifyContent: 'center',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
         marginVertical: 10,
         marginHorizontal: 5,
         paddingHorizontal: 50,
+        paddingBottom: 10,
         borderWidth: 1,
         borderRadius: 3,
-        backgroundColor: 'red'
+        backgroundColor: '#C78180',
+        borderColor: '#C78180'
+
     },
     titleContent: {
         fontSize: 20
@@ -159,13 +206,13 @@ const styles = StyleSheet.create({
         marginHorizontal: 50,
     },
     formContainer: {
-        flex: 0.6,
+        flex: 0.85,
         marginVertical: 10,
         marginHorizontal: 5,
         borderWidth: 1,
         borderRadius: 20,
-        borderColor: 'red',
-        backgroundColor: 'blue'
+        borderColor: '#C78180',
+        backgroundColor: '#C78180'
     },
     buttonContainer: {
         flexDirection: 'row',
@@ -185,8 +232,11 @@ const styles = StyleSheet.create({
         color: '#fff'
     },
     backArea: {
-        flex: 0.2,
-        backgroundColor: 'yellow'
+        flex: 0.1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: 30,
+        backgroundColor: '#C78180',
     }
 });
 
