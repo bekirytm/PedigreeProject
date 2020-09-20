@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar } from 'react-native';
+import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, KeyboardAvoidingView } from 'react-native';
 import {Provider} from 'mobx-react';
 
 
@@ -10,7 +10,9 @@ import Router from './src/Router';
 
 const App = () => {
   return (
-      <Router/>
+      <KeyboardAvoidingView style={{flex: 1}}>
+        <Router/>
+      </KeyboardAvoidingView>
   );
 };
 
