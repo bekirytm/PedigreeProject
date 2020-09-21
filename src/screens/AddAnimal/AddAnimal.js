@@ -4,6 +4,7 @@ import DatePicker from 'react-native-date-picker';
 
 
 const Addanimal = () => {
+    const [nickname, setNickname] = useState('');
     const [selectedValue, setSelectedValue] = useState("");
     const [date, setDate] = useState(new Date());
     const [modalVisible, setModalVisible] = useState(false);
@@ -30,14 +31,16 @@ const Addanimal = () => {
                             placeholder={'Father : '}
                             style={styles.inputStyle}
                         />
-                        <Picker
-                            selectedValue={selectedValue}
-                            style={styles.inputStyless}
-                            onValueChange={(itemValue) => setSelectedValue(itemValue)}
-                        >
-                            <Picker.Item label="Male" value="male" />
-                            <Picker.Item label="Female" value="female" />
-                        </Picker>
+                        <View style={styles.genderArea}>
+                            <Picker
+                                selectedValue={selectedValue}
+                                style={styles.inputStyless}
+                                onValueChange={(itemValue) => setSelectedValue(itemValue)}
+                            >
+                                <Picker.Item label="Male" value="male" />
+                                <Picker.Item label="Female" value="female" />
+                            </Picker>
+                        </View>
 
                         <Modal
                             animationType="slide"
@@ -49,17 +52,17 @@ const Addanimal = () => {
                         >
                             <View style={styles.centeredView}>
                                 <View style={styles.modalView}>
-                                    <Text style={styles.modalText}>Select Birthday </Text>
+                                    <Text style={styles.modalText}>Select the animal's birthday</Text>
                                     <DatePicker
                                         date={date}
                                         mode={'date'}
                                         onDateChange={setDate}
-                                        textColor={'#D14A4A'}
-                                        fadeToColor={'#D9D7D7'}
+                                        textColor={'#AD5E5D'}
+                                        fadeToColor={'#DBD8D8'}
                                     />
 
                                     <TouchableHighlight
-                                        style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+                                        style={{ ...styles.openButton, backgroundColor: "#AD5E5D" }}
                                         onPress={() => {
                                             setModalVisible(!modalVisible);
                                         }}
@@ -76,7 +79,7 @@ const Addanimal = () => {
                                 setModalVisible(true);
                             }}
                         >
-                            <Text style={styles.textModal}>Birthday</Text>
+                            <Text style={styles.textModal}>{`${date.getDate()}/${date.getMonth() +1}/${date.getFullYear()}`}</Text>
                         </TouchableOpacity>
 
 
@@ -134,13 +137,34 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOpacity: 0.3,
     },
-    inputStyless: {
+    genderArea: {
         paddingHorizontal: 15,
         marginHorizontal: 50,
+
         marginTop: 10,
         height: 40,
-        color: '#999999',
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#D4ADAC',
+        color: '#999',
         marginBottom: 8,
+        fontSize: 14,
+        backgroundColor: '#F5F3F4',
+        elevation: 7,
+        shadowColor: 'black',
+        shadowOpacity: 0.3,
+
+    },
+    inputStyless: {
+        transform: [
+            { scaleX: 0.85 },
+            { scaleY: 0.85 },
+        ],
+        width: '120%',
+        marginLeft: -32,
+        height: 38,
+        color: '#999999',
+        // marginBottom: 8,
     },
 
     centeredView: {
@@ -189,7 +213,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
     },
     textModal: {
-        color: '#BFBCBC',
+        color: '#999393',
         textAlign: "center",
     },
     textStyle: {
