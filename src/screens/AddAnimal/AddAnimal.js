@@ -1,14 +1,49 @@
 import React,{useState} from 'react';
-import { View, Text,TextInput,KeyboardAvoidingView, StyleSheet,Picker,Modal,TouchableHighlight, TouchableOpacity, Button, ScrollView, SafeAreaView} from 'react-native';
+import {
+    View,
+    Text,
+    TextInput,
+    KeyboardAvoidingView,
+    StyleSheet,
+    Picker,
+    Modal,
+    TouchableHighlight,
+    TouchableOpacity,
+    Button,
+    ScrollView,
+    SafeAreaView,
+    Alert
+} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 
+const inputAlert = (text, textEng) => {
+    Alert.alert(
+        "Error",
+        text + '\n' + '('+textEng+')',
+
+        [
+            { text: "OK", onPress: () => {
+                }}
+        ],
+        { cancelable: false }
+    );
+}
 
 const Addanimal = () => {
     const [nickname, setNickname] = useState('');
+    const [id, setId] = useState('');
+    const [mother, setMother] = useState('');
+    const [father, setFather] = useState('');
     const [selectedValue, setSelectedValue] = useState("");
     const [date, setDate] = useState(new Date());
     const [modalVisible, setModalVisible] = useState(false);
 
+const setDates = (e) => {
+    setDate(e)
+    console.log(date, e)
+    let valueDate = `${e.getDate()}/${e.getMonth() +1}/${e.getFullYear()}`;
+    console.log(valueDate);
+}
     return(
         <KeyboardAvoidingView style={{flex: 1}}>
             <View style={styles.container}>
@@ -20,14 +55,41 @@ const Addanimal = () => {
                 <View style={styles.formContainer}>
                     <View style={styles.formArea}>
                         <TextInput
+                            value={nickname}
+                            onChangeText={(nickname) => {
+                                setNickname(nickname);
+                                console.log(nickname);
+                            }}
                             placeholder={'Nickname : '}
                             style={styles.inputStyle}
                         />
                         <TextInput
+                            value={id}
+                            onChangeText={(id) => {
+                                setId(id);
+                                console.log(id);
+                            }}
+                            keyboardType={'number-pad'}
+                            maxLength={10}
+                            minLength={1}
+                            placeholder={'ID : '}
+                            style={styles.inputStyle}
+                        />
+                        <TextInput
+                            value={mother}
+                            onChangeText={(mother) => {
+                                setMother(mother);
+                                console.log(mother);
+                            }}
                             placeholder={'Mother : '}
                             style={styles.inputStyle}
                         />
                         <TextInput
+                            value={father}
+                            onChangeText={(father) => {
+                                setFather(father);
+                                console.log(father);
+                            }}
                             placeholder={'Father : '}
                             style={styles.inputStyle}
                         />
@@ -35,7 +97,10 @@ const Addanimal = () => {
                             <Picker
                                 selectedValue={selectedValue}
                                 style={styles.inputStyless}
-                                onValueChange={(itemValue) => setSelectedValue(itemValue)}
+                                onValueChange={(itemValue) => {
+                                    setSelectedValue(itemValue);
+                                    console.log(itemValue);
+                                }}
                             >
                                 <Picker.Item label="Male" value="male" />
                                 <Picker.Item label="Female" value="female" />
@@ -56,7 +121,7 @@ const Addanimal = () => {
                                     <DatePicker
                                         date={date}
                                         mode={'date'}
-                                        onDateChange={setDate}
+                                        onDateChange={(e) => setDates(e)}
                                         textColor={'#AD5E5D'}
                                         fadeToColor={'#DBD8D8'}
                                     />
@@ -82,6 +147,43 @@ const Addanimal = () => {
                             <Text style={styles.textModal}>{`${date.getDate()}/${date.getMonth() +1}/${date.getFullYear()}`}</Text>
                         </TouchableOpacity>
 
+                        <View style={styles.buttonContainer}>
+                            <TouchableOpacity style={styles.addAnimalButton} onPress={() => {
+
+                                let animalId = Math.floor(Math.random() * 10000000000);
+                                let now = Date.now();
+                                let now2 = date.getTime();
+                                console.log("NOW",now);
+                                console.log("NOW2",now2);
+                                console.log(typeof date);
+                                console.log(nickname,id,mother,father,selectedValue,date,animalId);
+                                if(nickname === "" || id === "" || mother === "" || father === "" || selectedValue === "" || typeof date !== 'object'){
+                                    inputAlert('Tüm alanları doldurmalısınız.','You must fill in all fields.');
+                                }else if(now2 > now){
+                                    inputAlert('Bugünden daha ileri bir tarih verilemez.', 'No later date can be given than today.');
+                                }
+                                // if(nickname === "" || id === "" || mother === "" || father === "" || ){
+                                //     inputAlert('Tüm alanları doldurmalısınız.');
+                                // }
+                                // else if(password !== retry){
+                                //     inputAlert('Password aynı değil');
+                                // }
+                                // else{
+                                //     let animal = {};
+                                //     person[username] = {
+                                //         username,
+                                //         email,
+                                //         password,
+                                //         retry
+                                //     }
+                                //     personStore.addPerson(person);
+                                //
+                                //     console.log(person);
+                                // }
+                            }}>
+                                <Text style={styles.textButton}>Add Animal</Text>
+                            </TouchableOpacity>
+                        </View>
 
 
                     </View>
@@ -225,6 +327,21 @@ const styles = StyleSheet.create({
     modalText: {
         marginBottom: 15,
         textAlign: "center"
+    },
+    addAnimalButton: {
+        paddingVertical: 9,
+        paddingHorizontal: 40,
+        borderRadius: 3,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#AD5E5D',
+        marginTop: 10,
+        height: 40,
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginVertical: 10,
     }
 });
 

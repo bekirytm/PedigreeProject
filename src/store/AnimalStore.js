@@ -10,6 +10,7 @@ class AnimalStore{
     @observable animals = [
         {
             nickname: 'testCow',
+            id: 0,
             birthday: '12/10/19',
             gender: 'male/female',
             mother: 'motherTest',
