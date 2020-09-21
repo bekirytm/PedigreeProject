@@ -133,7 +133,7 @@ export const SignUp = observer(({navigation}) => {
                                     password,
                                     retry
                                 }
-                                personStore.addAnimal(person);
+                                personStore.addPerson(person);
 
                                 console.log(person);
                             }

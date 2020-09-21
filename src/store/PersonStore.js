@@ -17,7 +17,7 @@ class PersonStore{
     ]
 
 
-    @action addAnimal(person){
+    @action addPerson(person){
         this.persons = [...this.persons, person];
         console.log(this.persons);
     }
