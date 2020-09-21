@@ -19,6 +19,8 @@ import Animal from './screens/Animals/Animals';
 import DetailAnimal from './screens/Detail/DetailAnimal';
 
 import Addanimal from './screens/AddAnimal/AddAnimal';
+import Datemodal from './screens/DateModal/Datemodal';
+
 
 
 // Navigators
