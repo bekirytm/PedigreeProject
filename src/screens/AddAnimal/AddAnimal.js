@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useContext} from 'react';
 import {
     View,
     Text,
@@ -15,6 +15,9 @@ import {
     Alert
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
+import {observer} from 'mobx-react';
+import AnimalStore from '../../store/AnimalStore';
+import PersonStore from "../../store/PersonStore";
 
 const inputAlert = (text, textEng) => {
     Alert.alert(
@@ -29,7 +32,7 @@ const inputAlert = (text, textEng) => {
     );
 }
 
-const Addanimal = () => {
+export const Addanimal = observer(() => {
     const [nickname, setNickname] = useState('');
     const [id, setId] = useState('');
     const [mother, setMother] = useState('');
@@ -37,6 +40,8 @@ const Addanimal = () => {
     const [selectedValue, setSelectedValue] = useState("");
     const [date, setDate] = useState(new Date());
     const [modalVisible, setModalVisible] = useState(false);
+
+    const animalStore = useContext(AnimalStore);
 
 const setDates = (e) => {
     setDate(e)
@@ -161,6 +166,21 @@ const setDates = (e) => {
                                     inputAlert('Tüm alanları doldurmalısınız.','You must fill in all fields.');
                                 }else if(now2 > now){
                                     inputAlert('Bugünden daha ileri bir tarih verilemez.', 'No later date can be given than today.');
+                                }else{
+                                    let animal = {};
+                                    animal[animalId] = {
+                                        nickname,
+                                        id,
+                                        mother,
+                                        father,
+                                        selectedValue,
+                                        date,
+                                        animalId
+                                    }
+
+                                    animalStore.addAnimal(animal);
+
+                                    console.log(animal);
                                 }
                                 // if(nickname === "" || id === "" || mother === "" || father === "" || ){
                                 //     inputAlert('Tüm alanları doldurmalısınız.');
@@ -192,7 +212,7 @@ const setDates = (e) => {
         </KeyboardAvoidingView>
 
     )
-};
+});
 
 const styles = StyleSheet.create({
     container: {

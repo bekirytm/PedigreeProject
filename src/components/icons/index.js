@@ -1,3 +1,7 @@
+export { default as Arrow } from './Arrow'
+export { default as Female } from './Female'
+export { default as Gender } from './Gender'
 export { default as List } from './List'
+export { default as Male } from './Male'
 export { default as Plus } from './Plus'
 export { default as User } from './User'
