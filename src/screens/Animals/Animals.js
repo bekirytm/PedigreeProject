@@ -1,7 +1,7 @@
 import React,{useState,useContext} from 'react';
 import { View, Text,TextInput,Image, StyleSheet, TouchableOpacity,FlatList,KeyboardAvoidingView, Button, ScrollView, SafeAreaView} from 'react-native';
 import ButtonComp from "../../components/ButtonComp";
-import {Male,Female,Plus, Arrow, FemaleGender,MaleGender, GenderFemale,GenderMale, Detailarrow} from '../../components/icons/index';
+import {GenderFemale,GenderMale, Detailarrow,Godetail} from '../../components/icons/index';
 
 import {observer} from 'mobx-react';
 import AnimalStore from '../../store/AnimalStore';
@@ -10,16 +10,7 @@ export const Animals = observer(({navigation}) => {
     const animalStore = useContext(AnimalStore);
 
     const Item = ({ item, index }) => (
-        <TouchableOpacity
-            // style={[styles.item,  {backgroundColor: index % 2 === 1 ? '#A5A5A5' : '#A5A5A5'}]}
-            // onPress={() => navigation.navigate('DetailScreen', {
-            //     name: item.name,
-            //     company: item.company,
-            //     picture: item.picture,
-            //     id: item._id,
-            //     about: item.about
-            // })}
-        >
+        <TouchableOpacity>
 
 
             <View style={styles.itemContainer}>
@@ -43,7 +34,7 @@ export const Animals = observer(({navigation}) => {
                     </View>
                 </View>
                 <View style={styles.DetailContainer}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Detail', {
+                    <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => navigation.navigate('Detail', {
                         nickname: item.nickname,
                         id: item.id,
                         mother: item.mother,
@@ -52,8 +43,8 @@ export const Animals = observer(({navigation}) => {
                         gender: item.gender,
                         image: item.image
                     })}>
-                        <Text>Detail</Text>
-                        <Detailarrow style={{width: 15, height: 15, color: 'black', marginLeft: 5}}/>
+                        <Text style={{fontSize: 15}}>Detail</Text>
+                        <Detailarrow style={[styles.genderIcon , {marginTop: 1}]}/>
                     </TouchableOpacity>
 
                 </View>
@@ -163,10 +154,8 @@ const styles = StyleSheet.create({
     },
     DetailContainer: {
         flex: 0.17,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-
+        flexDirection: 'column',
+        justifyContent: 'center'
     },
     imageContent: {
         width: 60,

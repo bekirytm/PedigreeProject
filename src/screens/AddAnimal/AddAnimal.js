@@ -188,24 +188,6 @@ const setDates = (e) => {
 
                                     console.log(animal);
                                 }
-                                // if(nickname === "" || id === "" || mother === "" || father === "" || ){
-                                //     inputAlert('Tüm alanları doldurmalısınız.');
-                                // }
-                                // else if(password !== retry){
-                                //     inputAlert('Password aynı değil');
-                                // }
-                                // else{
-                                //     let animal = {};
-                                //     person[username] = {
-                                //         username,
-                                //         email,
-                                //         password,
-                                //         retry
-                                //     }
-                                //     personStore.addPerson(person);
-                                //
-                                //     console.log(person);
-                                // }
                             }}>
                                 <Text style={styles.textButton}>Add Animal</Text>
                             </TouchableOpacity>
