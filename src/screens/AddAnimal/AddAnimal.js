@@ -158,9 +158,15 @@ const setDates = (e) => {
                                 let animalId = Math.floor(Math.random() * 10000000000);
                                 let now = Date.now();
                                 let now2 = date.getTime();
-                                console.log("NOW",now);
-                                console.log("NOW2",now2);
+                                let dateValue = `${date.getDate()}/${date.getMonth() +1}/${date.getFullYear()}`;
+                                console.log(typeof nickname);
+                                console.log(typeof id);
+                                console.log(typeof mother);
+                                console.log(typeof father);
+                                console.log(typeof selectedValue);
                                 console.log(typeof date);
+                                console.log(typeof dateValue);
+                                console.log(typeof animalId);
                                 console.log(nickname,id,mother,father,selectedValue,date,animalId);
                                 if(nickname === "" || id === "" || mother === "" || father === "" || selectedValue === "" || typeof date !== 'object'){
                                     inputAlert('Tüm alanları doldurmalısınız.','You must fill in all fields.');
@@ -168,13 +174,13 @@ const setDates = (e) => {
                                     inputAlert('Bugünden daha ileri bir tarih verilemez.', 'No later date can be given than today.');
                                 }else{
                                     let animal = {};
-                                    animal[animalId] = {
+                                    animal = {
                                         nickname,
                                         id,
                                         mother,
                                         father,
-                                        selectedValue,
-                                        date,
+                                        gender : selectedValue,
+                                        date : dateValue,
                                         animalId
                                     }
 

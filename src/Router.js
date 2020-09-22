@@ -36,15 +36,17 @@ const AnimalStact = () => {
             <StackAnimals.Screen name={'Animals'} component={Animal} options={{
                 headerShown: false
             }}/>
-            <StackAnimals.Screen name={'Detail'} component={DetailAnimal} options={{
-                headerStyle: {
-                    backgroundColor: colors.HeaderBackgroundColor,
-                },
-                headerTintColor: colors.HeaderTextColor,
-                headerTitleStyle: {
-                    fontWeight: '200'
-                }
-            }}/>
+            <StackAnimals.Screen name={'Detail'} component={DetailAnimal} options={({ route }) => ({ title: route.params.nickname })}
+            //                      options={({
+            //     headerStyle: {
+            //         backgroundColor: colors.HeaderBackgroundColor,
+            //     },
+            //     headerTintColor: colors.HeaderTextColor,
+            //     headerTitleStyle: {
+            //         fontWeight: '200'
+            //     }
+            // })}
+            />
         </StackAnimals.Navigator>
     )
 }
