@@ -1,4 +1,5 @@
 export { default as Arrow } from './Arrow'
+export { default as Camera } from './Camera'
 export { default as Detailarrow } from './Detailarrow'
 export { default as Female } from './Female'
 export { default as FemaleGender } from './FemaleGender'

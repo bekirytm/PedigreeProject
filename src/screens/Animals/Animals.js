@@ -15,11 +15,15 @@ export const Animals = observer(({navigation}) => {
 
             <View style={styles.itemContainer}>
                 <View style={styles.imageContainer}>
-
-                    <Image
-                        style={styles.imageContent}
-                        source={require('../../assets/images/cow.jpg')}>
-                    </Image>
+                    {
+                        item.image === undefined ? (<Image
+                            style={styles.imageContent}
+                            source={require('../../assets/images/cow.jpg')}>
+                        </Image>) : (<Image
+                            style={styles.imageContent}
+                            source={{ uri: item.image}}>
+                        </Image>)
+                    }
                 </View>
                 <View style={styles.genderContainer}>
                     {
@@ -30,7 +34,7 @@ export const Animals = observer(({navigation}) => {
                 <View style={styles.textArea}>
                     <View style={styles.textContainer}>
                         <Text style={styles.textContent}>Nickname: {item.nickname}</Text>
-                        <Text style={styles.textContent}>ID: {item.animalId}</Text>
+                        <Text style={styles.textContent}>ID: {item.id}</Text>
                     </View>
                 </View>
                 <View style={styles.DetailContainer}>

@@ -7,6 +7,7 @@ import {
     StyleSheet,
     Picker,
     Modal,
+    Image,
     TouchableHighlight,
     TouchableOpacity,
     Button,
@@ -18,6 +19,9 @@ import DatePicker from 'react-native-date-picker';
 import {observer} from 'mobx-react';
 import AnimalStore from '../../store/AnimalStore';
 import PersonStore from "../../store/PersonStore";
+import ImagePicker from 'react-native-image-picker';
+import {Camera} from '../../components/icons/index';
+
 
 const inputAlert = (text, textEng) => {
     Alert.alert(
@@ -41,6 +45,8 @@ export const Addanimal = observer(() => {
     const [date, setDate] = useState(new Date());
     const [modalVisible, setModalVisible] = useState(false);
 
+    const [image, setImage] = useState(null);
+
     const animalStore = useContext(AnimalStore);
 
 const setDates = (e) => {
@@ -49,6 +55,24 @@ const setDates = (e) => {
     let valueDate = `${e.getDate()}/${e.getMonth() +1}/${e.getFullYear()}`;
     console.log(valueDate);
 }
+
+    const selectImage = async () => {
+        ImagePicker.showImagePicker({noData:true,mediaType: 'photo'}, (response) => {
+            console.log('Response = ', response);
+
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            } else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            } else {
+
+            setImage(response.uri);
+            }
+        });
+    }
+
     return(
         <KeyboardAvoidingView style={{flex: 1}}>
             <View style={styles.container}>
@@ -86,7 +110,7 @@ const setDates = (e) => {
                                 setMother(mother);
                                 console.log(mother);
                             }}
-                            placeholder={'Mother : '}
+                            placeholder={'Mother ID: '}
                             style={styles.inputStyle}
                         />
                         <TextInput
@@ -95,7 +119,7 @@ const setDates = (e) => {
                                 setFather(father);
                                 console.log(father);
                             }}
-                            placeholder={'Father : '}
+                            placeholder={'Father ID: '}
                             style={styles.inputStyle}
                         />
                         <View style={styles.genderArea}>
@@ -152,6 +176,19 @@ const setDates = (e) => {
                             <Text style={styles.textModal}>{`${date.getDate()}/${date.getMonth() +1}/${date.getFullYear()}`}</Text>
                         </TouchableOpacity>
 
+
+
+                        {/*ADD Photo*/}
+                        <TouchableOpacity style={[styles.inputStyle, {justifyContent: 'center', alignItems: 'center'}]} onPress={selectImage}>
+                            {/*{*/}
+                            {/*    image && <Image source={{uri: image}} style={{width: 50,height:50}} resizeMode={'contain'}/>*/}
+                            {/*}*/}
+                            <Camera style={{width: 15, height: 15, color: 'black', padding: 5, }} opacity={0.4}/>
+                        </TouchableOpacity>
+
+
+
+
                         <View style={styles.buttonContainer}>
                             <TouchableOpacity style={styles.addAnimalButton} onPress={() => {
 
@@ -167,6 +204,7 @@ const setDates = (e) => {
                                 console.log(typeof date);
                                 console.log(typeof dateValue);
                                 console.log(typeof animalId);
+                                console.log(typeof image);
                                 console.log(nickname,id,mother,father,selectedValue,date,animalId);
                                 if(nickname === "" || id === "" || mother === "" || father === "" || selectedValue === "" || typeof date !== 'object'){
                                     inputAlert('Tüm alanları doldurmalısınız.','You must fill in all fields.');
@@ -181,7 +219,8 @@ const setDates = (e) => {
                                         father,
                                         gender : selectedValue,
                                         date : dateValue,
-                                        animalId
+                                        animalId,
+                                        image
                                     }
 
                                     animalStore.addAnimal(animal);
@@ -192,6 +231,7 @@ const setDates = (e) => {
                                 <Text style={styles.textButton}>Add Animal</Text>
                             </TouchableOpacity>
                         </View>
+
 
 
                     </View>
