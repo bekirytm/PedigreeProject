@@ -1,13 +1,16 @@
 import React,{useState,useContext} from 'react';
 import { View, Text,TextInput,Image, StyleSheet, TouchableOpacity,FlatList,KeyboardAvoidingView, Button, ScrollView, SafeAreaView} from 'react-native';
 import ButtonComp from "../../components/ButtonComp";
-import {GenderFemale,GenderMale, Detailarrow,Godetail} from '../../components/icons/index';
+import {GenderFemale,GenderMale, Detailarrow,Search } from '../../components/icons/index';
 
 import {observer} from 'mobx-react';
 import AnimalStore from '../../store/AnimalStore';
 
 export const Animals = observer(({navigation}) => {
     const animalStore = useContext(AnimalStore);
+
+    const [animalsData, setanimalsData] = useState(animalStore.animals);
+    const [textData,setTextData] = useState('');
 
     const Item = ({ item, index }) => (
         <TouchableOpacity>
@@ -57,7 +60,48 @@ export const Animals = observer(({navigation}) => {
         </TouchableOpacity>
     );
 
+    // Search Area
+    const flatListHeaderComp = () => {
+        return(
+            <View style={styles.searchInputContainer}>
+                <Search style={styles.iconContainer}/>
+                <TextInput
+                    onChangeText={(textValue) => {
+                        setTextData(textValue);
+                        console.log(textValue);
 
+                        filterInput(textValue);
+
+                    }}
+                    value={textData}
+                    autoCorrect={false}
+                    caretHidden={false}
+                    keyboardType={'default'}
+                    placeholder={'Search...'}
+                    placeholderTextColor={'#595959'}
+                    secureTextEntry={false}
+                    selectionColor={'black'}
+                    showSoftInputOnFocus={true}
+                    textAlign={'left'}
+
+                    style={styles.inputContainer}
+                />
+            </View>
+        )
+    }
+
+    // Search Filter
+    const filterInput = (textValue) => {
+        const newData = animalStore.animals.filter(item => {
+            const listItem = `${item.nickname.toLowerCase()} ${item.id.toLowerCase()}`;
+
+            return listItem.indexOf(textValue.toLowerCase()) > -1;
+        })
+
+        setanimalsData(newData);
+        // setLoading(false);
+
+    }
 
     const renderItem = ({item, index}) => {
         return(
@@ -78,11 +122,11 @@ export const Animals = observer(({navigation}) => {
             </View>
             <View style={styles.listContainer}>
                 <FlatList
-                    data={animalStore.animals}
+                    data={animalsData}
                     renderItem={renderItem}
-                    keyExtractor={item => item.animalId}
+                    keyExtractor={item => item.animalId.toString()}
                     // ItemSeparatorComponent={itemFlat}
-                    // ListHeaderComponent={flatListHeaderComp()}
+                    ListHeaderComponent={flatListHeaderComp()}
                     // ListFooterComponent={loadingComp}
                 />
             </View>
@@ -109,7 +153,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     searchContainer: {
-        flex: 0.1,
+        flex: 0.05,
         backgroundColor: 'gray'
     },
     searchContent: {
@@ -121,7 +165,7 @@ const styles = StyleSheet.create({
         fontSize: 22
     },
     listContainer: {
-        flex: 0.9,
+        flex: 0.95,
         backgroundColor: '#C78180',
     },
     itemContainer: {
@@ -176,6 +220,33 @@ const styles = StyleSheet.create({
         height: 20,
         color: 'black',
         padding: 10
+    },
+    searchInputContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#D8CACA',
+        borderRadius: 15,
+        marginHorizontal: 10,
+        marginVertical: 10
+    },
+    inputContainer: {
+        flex: 1,
+        paddingTop: 10,
+        paddingRight: 10,
+        paddingBottom: 10,
+        paddingLeft: 10,
+        color: '#424242',
+        fontSize: 15
+    },
+    iconContainer: {
+        flex: 1,
+        width: 20,
+        height: 20,
+        color: 'gray',
+        padding: 10,
+        marginLeft: 10
     }
 });
 

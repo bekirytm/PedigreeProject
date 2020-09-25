@@ -34,6 +34,15 @@ class AnimalStore{
             "id": "03",
             "mother": "MomCow3",
             "nickname": "TestCow3"
+        },
+        {
+            "animalId": 943532134523,
+            "date": "21/12/2018",
+            "father": "DadCow3",
+            "gender": "male",
+            "id": "04",
+            "mother": "MomCow3",
+            "nickname": "Deneme"
         }
     ];
 

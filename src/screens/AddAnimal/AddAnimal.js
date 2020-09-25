@@ -1,11 +1,11 @@
-import React,{useState, useContext} from 'react';
+import React,{useState, useContext, useRef} from 'react';
 import {
     View,
     Text,
     TextInput,
     KeyboardAvoidingView,
     StyleSheet,
-    Picker,
+
     Modal,
     Image,
     TouchableHighlight,
@@ -18,7 +18,7 @@ import {
 import DatePicker from 'react-native-date-picker';
 import {observer} from 'mobx-react';
 import AnimalStore from '../../store/AnimalStore';
-import PersonStore from "../../store/PersonStore";
+import { Picker } from '@react-native-community/picker';
 import ImagePicker from 'react-native-image-picker';
 import {Camera} from '../../components/icons/index';
 
@@ -49,6 +49,8 @@ export const Addanimal = observer(() => {
 
     const animalStore = useContext(AnimalStore);
 
+    const myTextInput = React.createRef();
+
 const setDates = (e) => {
     setDate(e)
     console.log(date, e)
@@ -76,13 +78,11 @@ const setDates = (e) => {
     return(
         <KeyboardAvoidingView style={{flex: 1}}>
             <View style={styles.container}>
-                <View style={styles.titleContainer}>
-                    <View style={styles.titleArea}>
-                        <Text style={styles.titleContent}>Add Animal</Text>
-                    </View>
-                </View>
                 <View style={styles.formContainer}>
                     <View style={styles.formArea}>
+                        <View style={styles.titleArea}>
+                            <Text style={styles.titleContent}>Add Animal</Text>
+                        </View>
                         <TextInput
                             value={nickname}
                             onChangeText={(nickname) => {
@@ -91,6 +91,7 @@ const setDates = (e) => {
                             }}
                             placeholder={'Nickname : '}
                             style={styles.inputStyle}
+                            ref={myTextInput}
                         />
                         <TextInput
                             value={id}
@@ -103,6 +104,7 @@ const setDates = (e) => {
                             minLength={1}
                             placeholder={'ID : '}
                             style={styles.inputStyle}
+                            ref={myTextInput}
                         />
                         <TextInput
                             value={mother}
@@ -112,6 +114,7 @@ const setDates = (e) => {
                             }}
                             placeholder={'Mother ID: '}
                             style={styles.inputStyle}
+                            ref={myTextInput}
                         />
                         <TextInput
                             value={father}
@@ -121,6 +124,7 @@ const setDates = (e) => {
                             }}
                             placeholder={'Father ID: '}
                             style={styles.inputStyle}
+                            ref={myTextInput}
                         />
                         <View style={styles.genderArea}>
                             <Picker
@@ -203,6 +207,7 @@ const setDates = (e) => {
                                 console.log(typeof selectedValue);
                                 console.log(typeof date);
                                 console.log(typeof dateValue);
+                                console.log("AnimalId");
                                 console.log(typeof animalId);
                                 console.log(typeof image);
                                 console.log(nickname,id,mother,father,selectedValue,date,animalId);
@@ -226,6 +231,7 @@ const setDates = (e) => {
                                     animalStore.addAnimal(animal);
 
                                     console.log(animal);
+                                    myTextInput.current.clear();
                                 }
                             }}>
                                 <Text style={styles.textButton}>Add Animal</Text>
@@ -247,29 +253,22 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column'
     },
-    titleContainer: {
-        flex: 0.15,
-        backgroundColor: '#8E8C8C',
-        justifyContent: 'center',
-        paddingHorizontal: 10
-    },
     titleArea: {
-
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 10
     },
     titleContent: {
-        fontSize: 20
+        fontSize: 21
     },
     formContainer: {
-        flex: 0.85,
+        flex: 1,
         backgroundColor: '#D7D7D7'
     },
     formArea: {
         flex: 1,
         marginHorizontal: 10,
         marginVertical: 10,
-        borderWidth: 1,
-        borderColor: 'black',
-        borderRadius: 5
     },
     inputStyle: {
         paddingHorizontal: 15,
@@ -385,6 +384,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#AD5E5D',
         marginTop: 10,
         height: 40,
+    },
+    textButton: {
+        fontSize: 15,
+        color: '#fff'
     },
     buttonContainer: {
         flexDirection: 'row',
