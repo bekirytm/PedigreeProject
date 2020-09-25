@@ -11,38 +11,56 @@ class AnimalStore{
         {
             "animalId": 9592183120,
             "date": "21/12/2018",
-            "father": "01",
+            "father": "03",
             "gender": "female",
-            "id": "03",
-            "mother": "02",
-            "nickname": "TestCow1"
+            "id": "05",
+            "mother": "04",
+            "nickname": "Child1"
         },
         {
             "animalId": 123124124,
             "date": "21/12/2018",
-            "father": "DadCow2",
+            "father": "01",
             "gender": "female",
-            "id": "02",
-            "mother": "MomCow2",
-            "nickname": "TestCow2"
+            "id": "04",
+            "mother": "02",
+            "nickname": "Mother"
         },
         {
-            "animalId": 943534523,
+            "animalId": 94235423,
             "date": "21/12/2018",
-            "father": "DadCow3",
+            "father": "06",
             "gender": "male",
             "id": "03",
-            "mother": "MomCow3",
-            "nickname": "TestCow3"
+            "mother": "07",
+            "nickname": "Father"
         },
         {
-            "animalId": 943532134523,
+            "animalId": 94534223,
             "date": "21/12/2018",
-            "father": "DadCow3",
+            "father": "03",
             "gender": "male",
-            "id": "04",
-            "mother": "MomCow3",
-            "nickname": "Deneme"
+            "id": "09",
+            "mother": "04",
+            "nickname": "Child2"
+        },
+        {
+            "animalId": 94312453423,
+            "date": "21/12/2018",
+            "father": "03",
+            "gender": "female",
+            "id": "10",
+            "mother": "04",
+            "nickname": "Child2"
+        },
+        {
+            "animalId": 121334523,
+            "date": "21/12/2018",
+            "father": "18",
+            "gender": "female",
+            "id": "11",
+            "mother": "05",
+            "nickname": "Torun"
         }
     ];
 

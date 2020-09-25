@@ -41,7 +41,7 @@ const AnimalStact = () => {
                     headerStyle: {
                         backgroundColor: colors.HeaderBackgroundColor,
                     },
-                        headerTintColor: colors.HeaderTextColor,
+                        headerTintColor: '#fff',
                         headerTitleStyle: {
                             fontWeight: '200'
                         }

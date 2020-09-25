@@ -9,7 +9,7 @@ import AnimalStore from '../../store/AnimalStore';
 export const Animals = observer(({navigation}) => {
     const animalStore = useContext(AnimalStore);
 
-    const [animalsData, setanimalsData] = useState(animalStore.animals);
+    const [animalsData, setAnimalsData] = useState(animalStore.animals);
     const [textData,setTextData] = useState('');
 
     const Item = ({ item, index }) => (
@@ -98,7 +98,7 @@ export const Animals = observer(({navigation}) => {
             return listItem.indexOf(textValue.toLowerCase()) > -1;
         })
 
-        setanimalsData(newData);
+        setAnimalsData(newData);
         // setLoading(false);
 
     }
@@ -115,12 +115,11 @@ export const Animals = observer(({navigation}) => {
         <SafeAreaView style={{flex: 1}}>
 
         <View style={styles.container}>
-            <View style={styles.searchContainer}>
-                <View style={styles.searchContent}>
-                    <Text style={styles.titleArea}>My Animals</Text>
-                </View>
-            </View>
+
             <View style={styles.listContainer}>
+                <View style={styles.titleArea}>
+                    <Text style={styles.textTitle}>My Animals</Text>
+                </View>
                 <FlatList
                     data={animalsData}
                     renderItem={renderItem}
@@ -152,20 +151,17 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    searchContainer: {
-        flex: 0.05,
-        backgroundColor: 'gray'
-    },
-    searchContent: {
-        flex: 1,
+    titleArea: {
+        marginTop: 10,
         justifyContent: 'center',
         alignItems: 'center'
     },
-    titleArea: {
-        fontSize: 22
+    textTitle: {
+        fontSize: 18,
+        color: '#000'
     },
     listContainer: {
-        flex: 0.95,
+        flex: 1,
         backgroundColor: '#C78180',
     },
     itemContainer: {
